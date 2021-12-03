@@ -1,5 +1,3 @@
-import { AppInitService } from './core/settings/app-init.service';
-import { AuthenticTokenInterceptor } from './core/interceptors/authentic-token.interceptor';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ErrorModule } from './core/error/error.module';
 import { AppInjector } from './core/services/app-injector.service';
@@ -17,14 +15,11 @@ import localePT from '@angular/common/locales/pt';
 import localeExtraPT from '@angular/common/locales/extra/pt';
 import { registerLocaleData } from '@angular/common';
 import { NgxMaskModule } from 'ngx-mask';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { initializerKeycloak } from './core/util/app-init';
 
 registerLocaleData(localePT, 'pt', localeExtraPT);
 
-export function initializeApp(appInitService: AppInitService) {
-  return (): Promise<any> => {
-    return appInitService.Init();
-  }
-}
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,18 +29,23 @@ export function initializeApp(appInitService: AppInitService) {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    KeycloakAngularModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    HttpClientModule,
     NgxMaskModule.forRoot(),
     ErrorModule
   ],
   providers: [
-    AppInitService,
-    { provide: APP_INITIALIZER, useFactory: initializeApp, deps: [AppInitService], multi: true},
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializerKeycloak,
+      multi: true,
+      deps: [KeycloakService]
+    },
     [{ provide: LOCALE_ID, useValue: 'pt' }],
     { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthenticTokenInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthenticTokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
   exports: [],

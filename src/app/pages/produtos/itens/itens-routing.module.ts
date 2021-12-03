@@ -8,7 +8,7 @@ import { ItensFormularioComponent } from './itens-formulario/itens-formulario.co
 const routes: Routes = [
 
   { path: '', component: ItensComponent, children: [
-    {path: '', component: ItensListComponent, pathMatch: 'full'},
+    {path: '', component: ItensListComponent},
     {path: 'adicionar', component: ItensFormularioComponent },
     {path: 'atualizar/:id', component: ItensFormularioComponent }
   ]

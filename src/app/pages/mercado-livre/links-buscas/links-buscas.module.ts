@@ -12,7 +12,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ConfirmDialogModule } from 'src/app/shared/components/confirm-dialog/confirm-dialog.module';
 import { LinksListComponent } from './links-list/links-list.component';
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 const importsPadrao = [
   AngularMaterialModule,
@@ -34,8 +33,6 @@ const importsPadrao = [
     LinksBuscasRoutingModule,
     importsPadrao,
     TimePickerModule,
-    OwlDateTimeModule,
-    OwlNativeDateTimeModule,
   ]
 })
 export class LinksBuscasModule { }

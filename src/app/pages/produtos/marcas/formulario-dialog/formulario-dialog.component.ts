@@ -25,13 +25,13 @@ export class FormularioDialogComponent implements OnInit {
 
   private createForm(): void {
     this.marcasForm = this.formaBuilder.group({
-      idMarcas: new FormControl({value: this.marcasModel.id, disabled: true}),
+      MarcasModals: new FormControl({value: this.marcasModel.id, disabled: true}),
       nome: new FormControl({ value: this.marcasModel.nome, disabled: this.marcasModel.id !== undefined }, Validators.required),
     });
   }
 
   submitForm(){
-    this.marcasModel.id = this.marcasForm.controls.idMarcas.value;
+    this.marcasModel.id = this.marcasForm.controls.MarcasModals.value;
     this.marcasModel.nome = this.marcasForm.controls.nome.value;
     this.dialogRef.close(this.marcasModel);
   }

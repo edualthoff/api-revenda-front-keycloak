@@ -1,3 +1,4 @@
+import { ItensModal } from './../../../produtos/itens/services/itens.modal';
 import { PaginationResponse } from './../../../../core/modals/pagination-implements.modal';
 import { BaseImplements } from './../../../../core/modals/base-implements.modal';
 
@@ -8,8 +9,10 @@ export interface LinksModal extends BaseImplements {
     rangeInicial: number;
     rangeFinal: number;
     status: boolean;
-    idProduto: string;
-    schedulingTime: schedulingTime;
+    idProduto: ItensModal;
+    hours: number;
+    minutes: number;
+    nextDate: Date;
 }
 
 export enum Condicao {
@@ -18,7 +21,7 @@ export enum Condicao {
     recondicionado
 }
 
-export interface schedulingTime {
+export interface SchedulingTime {
     hours: number;
     minutes: number;
     meridiem: 'AM' | 'PM' | '';

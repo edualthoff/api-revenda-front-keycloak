@@ -1,4 +1,5 @@
-@import "./helpers";
+@import "./scss/material/imports-material";
+@import "./scss/_mixins";
 
 .button-sidenav-open {
   display: block;

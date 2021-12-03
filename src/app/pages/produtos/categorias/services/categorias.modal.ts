@@ -1,6 +1,6 @@
 export interface CategoriasModal {
 
-    id: string;
+    id: number;
     nome: string;
     status: boolean;
 }

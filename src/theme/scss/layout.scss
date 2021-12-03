@@ -12,9 +12,10 @@ html {
 }
 
 main {
-    background: url("#{$image-path}/Dark_background_1920x1080.png") center top no-repeat;
+    //background: url("#{$image-path}/Dark_background_1920x1080.png") center top no-repeat;
     background-size: cover;
     padding-left: 10px;
     padding-top: 10px;
     padding-right: 10px;
+    background-color: #333333;
 }

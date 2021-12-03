@@ -16,7 +16,7 @@
                     <td mat-cell *matCellDef="let element">
                         <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
                             <div class="mobile-label">#: </div>
-                            <div>{{element.id | uppercase}} </div>
+                            <div>{{element?.id}} </div>
                         </div>
                 </ng-container>
 
@@ -26,7 +26,7 @@
                     <td mat-cell *matCellDef="let element">
                         <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
                             <div class="mobile-label">Links URL:</div>
-                            <div>{{element.linkUrl | uppercase}} </div>
+                            <div>{{element?.linkUrl | uppercase}} </div>
                         </div>
                     </td>
                 </ng-container>
@@ -37,7 +37,7 @@
                     <td mat-cell *matCellDef="let element">
                         <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
                             <div class="mobile-label"> Descrição: </div>
-                            <div>{{element.descricao }} </div>
+                            <div>{{element?.descricao}} </div>
                         </div>
                     </td>
                 </ng-container>
@@ -48,7 +48,7 @@
                     <td mat-cell *matCellDef="let element">
                         <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
                             <div class="mobile-label"> Condição: </div>
-                            <div>{{element.condicao }} </div>
+                            <div>{{element?.condicao}} </div>
                         </div>
                     </td>
                 </ng-container>
@@ -60,7 +60,7 @@
                         <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
                             <div class="mobile-label"> Ranger Inicial: </div>
                             <div matPrefix>R$</div>
-                            <div>{{element.rangeInicial }} </div>
+                            <div>{{element?.rangeInicial}} </div>
                         </div>
                     </td>
                 </ng-container>
@@ -72,7 +72,7 @@
                         <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
                             <div class="mobile-label"> Ranger Final: </div>
                             <div matPrefix>R$</div>
-                            <div>{{element.rangeFinal }} </div>
+                            <div>{{element?.rangeFinal}} </div>
                         </div>
                     </td>
                 </ng-container>
@@ -82,7 +82,7 @@
                     <td mat-cell *matCellDef="let element">
                         <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
                             <div class="mobile-label"> Status: </div>
-                            <div>{{element.schedulingTime.hours}}:{{element.schedulingTime.minutes}} </div>
+                            <div>{{element?.hours}}:{{element?.minutes}} </div>
                         </div>
                     </td>
                 </ng-container>
@@ -93,7 +93,7 @@
                     <td mat-cell *matCellDef="let element">
                         <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
                             <div class="mobile-label"> Status: </div>
-                            <div>{{element.status }} </div>
+                            <div>{{element?.status}} </div>
                         </div>
                     </td>
                 </ng-container>
@@ -106,10 +106,10 @@
                             <div class="mobile-label"> Editar: </div>
                             <div>
                                 <button mat-icon-button>
-                                    <mat-icon class="sidenav-icon" (click)="buttonEditar(element)">edit</mat-icon>
+                                    <mat-icon (click)="buttonEditar(element)">edit</mat-icon>
                                 </button>
                                 <button mat-icon-button>
-                                    <mat-icon class="sidenav-icon" (click)="buttonExlcuir(element.id)">delete_forever
+                                    <mat-icon (click)="buttonExlcuir(element.id)">delete_forever
                                     </mat-icon>
                                 </button>
                             </div>

@@ -15,11 +15,11 @@ import { MatTableDataSource, MatTable } from '@angular/material/table';
 })
 export class ItensListComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private http: HttpItensService, private router: Router ) { }
+  constructor(public dialog: MatDialog, private http: HttpItensService, private router: Router) { }
 
   @ViewChild('table') table: MatTable<ItensProduto>;
   displayedColumns: string[] = ['id', 'modelo', 'descricao', 'idCategoria', 'idMarca', 'editar'];
-  public dataSource = new MatTableDataSource<ItensProduto>();
+  public dataSource = new MatTableDataSource<ItensModal>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
@@ -42,19 +42,21 @@ export class ItensListComponent implements OnInit {
 
   loadTodosPage(index: number = this.paginator.pageIndex, size: number = this.paginator.pageSize) {
     this.http.getTodosPage(index, size).subscribe((res: ItensListResponse) => {
-      const itens = new Array<ItensProduto>();
+      /*const itens = new Array<ItensModal>();
+      console.log("item list 3 "+ JSON.stringify(res));
       res.content.forEach(x => {
-        const itenFor = new ItensProduto( x.id, x.modelo, x.descricao, x.idCategoria, x.idMarca );
-        itenFor.getMarcas();
-        itenFor.getCategorias();
-        itens.push(itenFor);
-        //console.log("teste 2", itenFor.marcasModal.nome, " ", itenFor.categoriasModal.nome);
-      });
-
+        console.log("item list content /n"+ JSON.stringify(x));
+        //const itenFor = new ItensProduto(x.id, x.modelo, x.descricao, x.idCategoria, x.idMarca);
+        //itenFor.getMarcasModal();
+        //itenFor.getCategoriasModal();
+        //console.log("item list itenFor "+ JSON.stringify(itenFor));
+        itens.push(x);
+      });*/
       this.paginator.length = res.totalElements;
-      this.dataSource.data = itens;
+      this.dataSource.data = res.content;
       this.table.renderRows();
     });
+
   }
 
   buttonAdicionar() {
@@ -72,10 +74,8 @@ export class ItensListComponent implements OnInit {
     const message = `Gostaria de excluir o Iten?`;
     const dialogData = new ConfirmDialogModel(this.dialog, "Excluir Itens", message);
     dialogData.montDialog().pipe(filter(x => x === true)).subscribe((x) => {
-      this.http.delete(idItens).subscribe(
-        () => { },
-        () => { },
-        () => { this.loadTodosPage(); });
+      this.http.delete(idItens).subscribe(() => { this.loadTodosPage(); });
     });
   }
+
 }

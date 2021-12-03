@@ -1,8 +1,8 @@
+import { pathValues, pathPredicates } from './../../../../core/util/path-values';
 import { Observable } from 'rxjs';
-import { API_URL } from './../../../../core/settings/config.settings';
-import { CategoriasModal, CategoriasListResponse } from './categorias.modal';
+import { CategoriasListResponse, CategoriasModal } from './categorias.modal';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,20 +15,20 @@ export class HttpCategoriasService {
    * Adiiconar uma nova Categoria
    */
   post(categorias: CategoriasModal) {
-    return this.http.post<CategoriasModal>(`${API_URL}/categorias`, categorias);
+    return this.http.post<CategoriasModal>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/categorias`, categorias);
   }
 
-  delete(idCategoria: string) {
+  delete(idCategoria: number) {
     //console.log("delete "+ (`${API_URL}/categorias/`+ encodeURIComponent(idCategoria)));
-    return this.http.delete<CategoriasModal>(`${API_URL}/categorias/${idCategoria}`);
+    return this.http.delete<CategoriasModal>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/categorias/${idCategoria}`);
   }
 
-  put(idCategoria: string, categorias: CategoriasModal){
-    return this.http.put<CategoriasModal>(`${API_URL}/categorias/${idCategoria}`, categorias);
+  put(idCategoria: number, categorias: CategoriasModal){
+    return this.http.put<CategoriasModal>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/categorias/${idCategoria}`, categorias);
   }
   getTodosPage(pageNumber: number = 0, pageSize: number = 10) {
     const params = { page: pageNumber.toString(), size: pageSize.toString() };
-    return this.http.get<CategoriasListResponse>(`${API_URL}/categorias/todos`, { params });
+    return this.http.get<CategoriasListResponse>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/categorias/todos`, { params });
   }
   /**
    * Retorna uma categoria
@@ -37,7 +37,7 @@ export class HttpCategoriasService {
    * @returns
    * @memberof HttpCategoriasService
    */
-  get(idCategoira: string): Observable<CategoriasModal> {
-    return this.http.get<CategoriasModal>(`${API_URL}/categorias/${idCategoira}`);
+  get(idCategoira: number): Observable<CategoriasModal> {
+    return this.http.get<CategoriasModal>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/categorias/${idCategoira}`);
   }
 }

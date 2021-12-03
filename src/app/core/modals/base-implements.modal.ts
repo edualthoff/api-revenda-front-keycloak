@@ -1,6 +1,6 @@
 
 export interface BaseImplements {
-    id: string;
+    id: number;
     date_created: Date;
     date_modified: Date;
 }

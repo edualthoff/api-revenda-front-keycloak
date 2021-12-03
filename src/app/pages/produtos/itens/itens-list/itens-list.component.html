@@ -31,13 +31,13 @@
                 <!-- idCategoria Column -->
                 <ng-container matColumnDef="idCategoria">
                     <th mat-header-cell *matHeaderCellDef> Categorias </th>
-                    <td mat-cell *matCellDef="let element"> {{element.categoriasModal.nome | titlecase}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.idCategoria.nome | titlecase}} </td>
                 </ng-container>
 
-                <!-- idMarca Column -->
+                <!-- MarcasModal Column -->
                 <ng-container matColumnDef="idMarca">
                     <th mat-header-cell *matHeaderCellDef> Marcas </th>
-                    <td mat-cell *matCellDef="let element"> {{element.marcasModal.nome | titlecase}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.idMarca.nome | titlecase}} </td>
                 </ng-container>
 
                 <!-- Editar Column -->

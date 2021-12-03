@@ -1,42 +1,47 @@
+import { pathValues, pathPredicates } from './../../../../core/util/path-values';
 import { ItensListResponse, ItensModal } from './itens.modal';
-import { API_URL } from './../../../../core/settings/config.settings';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { retry } from 'rxjs/operators';
+import { map, retry } from 'rxjs/operators';
+import { stringify } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpItensService {
 
-  private rotaUrl = 'itens';
+  private urlItens = 'itens';
 
-  constructor(private http: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  /**
+/**
  * Adiiconar uma novo Itens
  */
-  post(itensModel: ItensModal) {
-    return this.http.post<ItensModal>(`${API_URL}/${this.rotaUrl}`, itensModel);
+  postAdicionar(itensModel: ItensModal) {
+    console.log('json: ' + JSON.stringify(itensModel));
+    return this.httpClient.post<ItensModal>
+    (`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.urlItens}`, itensModel);
   }
 
   delete(idItens: string) {
-    //console.log("delete "+ (`${API_URL}/categorias/`+ encodeURIComponent(idMarcas)));
-    return this.http.delete<ItensModal>(`${API_URL}/${this.rotaUrl}/${idItens}`);
+    //console.log("delete "+ (`${API_URL}/categorias/`+ encodeURIComponent(MarcasModals)));
+    return this.httpClient.delete<ItensModal>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.urlItens}/${idItens}`);
   }
 
-  put(idItens: string, itensModel: ItensModal) {
-    return this.http.put<ItensModal>(`${API_URL}/${this.rotaUrl}/${idItens}`, itensModel);
+  putAtualizar(idItens: string, itensModel: ItensModal) {
+    return this.httpClient.put<ItensModal>
+      (`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.urlItens}/${idItens}`, itensModel);
   }
 
   getTodosPage(pageNumber: number = 0, pageSize: number = 10) {
     const params = { page: pageNumber.toString(), size: pageSize.toString() };
-    return this.http.get<ItensListResponse>(`${API_URL}/${this.rotaUrl}/todos`, { params });
+    return this.httpClient.get<ItensListResponse>
+      (`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.urlItens}/todos`, { params });
   }
 
   /**
-   * Buscar itens por modelo retornando uma pagina @param ItensListResponse 
+   * Buscar itens por modelo retornando uma pagina @param ItensListResponse
    * Auto Complete - paginacao
    *
    * @param {number} [pageNumber=0]
@@ -47,13 +52,15 @@ export class HttpItensService {
    */
   getTodosPagePorModelo(pageNumber: number = 0, pageSize: number = 10, modelo: string): Observable<ItensListResponse> {
     const params = { page: pageNumber.toString(), size: pageSize.toString(), modelo: modelo };
-    return this.http.get<ItensListResponse>(`${API_URL}/${this.rotaUrl}/modelo`, { params }).pipe(
-      retry(1)
-    );
+    return this.httpClient.get<ItensListResponse>
+      (`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.urlItens}/modelo`, { params })
+      .pipe(
+        retry(1)
+      );
   }
 
   get(idItens: string) {
-    return this.http.get<ItensModal>(`${API_URL}/${this.rotaUrl}/${idItens}`);
+    return this.httpClient.get<ItensModal>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.urlItens}/${idItens}`);
   }
 
 }

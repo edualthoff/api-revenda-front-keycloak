@@ -13,26 +13,26 @@ export class GlobalErrorHandlerService implements ErrorHandler {
   handleError(error: HttpErrorResponse): void {
     if (error instanceof HttpErrorResponse) {
       let messageErrorRequest: MessageErrorRequest = Object.assign(MessageErrorRequest,);
-      if(error.statusText === 'Unknown Error') {
+      if (error.statusText === 'Unknown Error') {
         const message = new MessageErrorRequestCustom();
         message.message = "Error desconhecido"
         this.injector.get(ErrorSnackBarService).openSnackBar(message);
       }
       switch (error.status) {
-        case 401:      //login
-          this.injector.get(ErrorDialogService).openDialog(messageErrorRequest);
-          this.injector.get(Router).navigateByUrl("/auth/login");
+        //case 401:      //login
+        //  this.injector.get(ErrorDialogService).openDialog(messageErrorRequest);
+         // this.injector.get(Router).navigateByUrl("/auth/login");
           //console.log(`redirecionar login`);
-          break;
-        case 403:     //forbidden
-          this.injector.get(ErrorDialogService).openDialog(messageErrorRequest);
-          this.injector.get(Router).navigateByUrl("/auth/login");
+        //  break;
+       // case 403:     //forbidden
+        //  this.injector.get(ErrorDialogService).openDialog(messageErrorRequest);
+        //  this.injector.get(Router).navigateByUrl("/auth/login");
           //console.log(`redirecionar login`);
-          break;
-          case 102:     //forbidden
+        //  break;
+        case 102:     //forbidden
           console.log(`redirecionar 102`);
           break;
-          case 0:     //Error Sem conexao
+        case 0:     //Error Sem conexao
           const message = new MessageErrorRequestCustom();
           message.message = "Error: Sem conexão com a internet"
           this.injector.get(ErrorSnackBarService).openSnackBar(message);

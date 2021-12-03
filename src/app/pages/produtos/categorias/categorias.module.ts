@@ -30,7 +30,6 @@ const importsPadrao = [
     CategoriasRoutingModule,
     importsPadrao,
   ],
-  providers: [
-  ]
+  providers: [ ]
 })
 export class CategoriasModule { }

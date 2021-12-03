@@ -43,8 +43,8 @@ export class TimePickerDirective implements AfterViewInit {
     ]);
     const overlayConfig = new OverlayConfig({
       positionStrategy,
-      height: 'auto',
-      width: '0%',
+      height: '222px',
+      width: '230px',
       disposeOnNavigation: false,
     });
     overlayConfig.hasBackdrop = true;

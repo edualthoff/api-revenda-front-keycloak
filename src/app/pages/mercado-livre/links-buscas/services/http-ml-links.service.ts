@@ -1,4 +1,4 @@
-import { API_URL } from './../../../../core/settings/config.settings';
+import { pathValues, pathPredicates } from './../../../../core/util/path-values';
 import { LinksModal, LinksMlListResponse } from './links.modal';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -18,7 +18,7 @@ export class HttpMlLinksService {
    * @memberof HttpMlLinksService
    */
   post(linkModal: LinksModal) {
-    return this.http.post<LinksModal>(`${API_URL}/${this.rotaUrl}`, linkModal);
+    return this.http.post<LinksModal>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.rotaUrl}`, linkModal);
   }
   /**
    * Atualizar um link
@@ -28,7 +28,7 @@ export class HttpMlLinksService {
    * @memberof HttpMlLinksService
    */
   put(idLink: string, linkModal: LinksModal) {
-    return this.http.put<LinksModal>(`${API_URL}/${this.rotaUrl}/${idLink}`, linkModal);
+    return this.http.put<LinksModal>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.rotaUrl}/${idLink}`, linkModal);
   }
   /**
    * Deletar um link
@@ -37,7 +37,7 @@ export class HttpMlLinksService {
    * @memberof HttpMlLinksService
    */
   delete(idLinks: string) {
-    return this.http.delete<LinksModal>(`${API_URL}/${this.rotaUrl}/${idLinks}`);
+    return this.http.delete<LinksModal>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.rotaUrl}/${idLinks}`);
   }
 
   /** 
@@ -47,7 +47,7 @@ export class HttpMlLinksService {
    * @memberof HttpMlLinksService
    */
   get(idLinks: string) {
-    return this.http.get<LinksModal>(`${API_URL}/${this.rotaUrl}/${idLinks}`);
+    return this.http.get<LinksModal>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.rotaUrl}/${idLinks}`);
   }
 
   /**
@@ -59,7 +59,7 @@ export class HttpMlLinksService {
    */
   getTodosPage(pageNumber: number = 0, pageSize: number = 10) {
     const params = { page: pageNumber.toString(), size: pageSize.toString() };
-    return this.http.get<LinksMlListResponse>(`${API_URL}/${this.rotaUrl}/todos`, { params });
+    return this.http.get<LinksMlListResponse>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.rotaUrl}/todos`, { params });
   }
 
 }

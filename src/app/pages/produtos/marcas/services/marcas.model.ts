@@ -1,6 +1,6 @@
 export interface MarcasModal {
 
-    id: string;
+    id: number;
     nome: string;
 }
 

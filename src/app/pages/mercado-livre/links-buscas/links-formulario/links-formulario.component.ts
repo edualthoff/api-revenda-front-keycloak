@@ -1,11 +1,11 @@
-import { TimePickerComponent, TimeCustom } from './../../../../shared/components/time-picker/time-picker.component';
+import { TimeCustom } from './../../../../shared/components/time-picker/time-picker.component';
 import { MatDialog } from '@angular/material/dialog';
 import { URL_HTTPS_PATTERN } from './../../../../shared/util/pattern.regex';
-import { LinksModal } from './../services/links.modal';
+import { LinksModal, SchedulingTime } from './../services/links.modal';
 import { ItensProduto, ItensListResponse, ItensModal } from './../../../produtos/itens/services/itens.modal';
 import { HttpItensService } from './../../../produtos/itens/services/http-itens.service';
 import { HttpMlLinksService } from './../services/http-ml-links.service';
-import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
@@ -40,8 +40,12 @@ export class LinksFormularioComponent implements OnInit, OnDestroy {
     this.linksForm.get('timeCustom').setValue(timeCustom);
 
     if (this._activedRoute.snapshot.params['id'] !== undefined) {
+      let schedulingTime: SchedulingTime = {} as SchedulingTime;
       this.titulo = 'Atualizar';
       this._http.get(this._activedRoute.snapshot.params['id']).pipe(debounceTime(200)).subscribe(result => {
+        result.hours = schedulingTime.hours;
+        result.minutes = schedulingTime.minutes;
+        result.nextDate = schedulingTime.nextDate;
         this.linksForm.patchValue({
           idLink: result.id,
           linkUrl: result.linkUrl,
@@ -50,8 +54,8 @@ export class LinksFormularioComponent implements OnInit, OnDestroy {
           rangeFinal: result.rangeFinal,
           condicao: result.condicao,
           status: result.status,
-          idProduto: this.getItemIdProduto(result.idProduto),
-          timeCustom: result.schedulingTime
+          idProduto: this.getItemIdProduto(result.idProduto.id),
+          timeCustom: schedulingTime
         });
       });
     }
@@ -79,8 +83,9 @@ export class LinksFormularioComponent implements OnInit, OnDestroy {
 
   private getItemIdProduto(idProduto: string) {
     this._httpItens.get(idProduto).subscribe((x) => {
-      this.linksForm.get(['idProduto']).setValue(new ItensProduto(x.id, x.modelo, x.descricao, x.idCategoria, x.idMarca));
-      //return new ItensProduto(x.id, x.modelo, x.descricao, x.idCategoria, x.idMarca);
+      //this.linksForm.get(['idProduto']).setValue(new ItensProduto(x.id, x.modelo, x.descricao, x.idCategoria, x.idMarca));
+      this.linksForm.get(['idProduto']).setValue(x);
+      //return new ItensProduto(x.id, x.modelo, x.descricao, x.idCategoria, x.MarcasModal);
     });
   }
   /** Valor mostrado no input do AutoComplete */
@@ -96,16 +101,18 @@ export class LinksFormularioComponent implements OnInit, OnDestroy {
       // Set loading to true when request begins
       debounceTime(20),
       map((result: ItensListResponse) => {
-        return result.content.map((x) => {
-          const itens = new ItensProduto(x.id, x.modelo, x.descricao, x.idCategoria, x.idMarca);
-          itens.getCategorias().subscribe();
+        console.log("list item ", JSON.stringify(result.content));
+        return result.content;
+        /*.map((x) => {
+         // const itens = new ItensProduto(x.id, x.modelo, x.descricao, x.idCategoria, x.idMarca);
+          //itens.getCategorias().subscribe();
           //console.log("log 2: ", itens.id, " ", itens.categoriasModal.nome);
-
-          return itens;
-        });
+          console.log("list item ", JSON.stringify(x));
+          return x;
+        });*/
       },
         (err) => {
-          console.log(err);
+          console.log("error link ", err);
           this.loading.next(false);
           return of([{ login: "Error no servidor" }]);
         }
@@ -122,7 +129,8 @@ export class LinksFormularioComponent implements OnInit, OnDestroy {
       rangeInicial: new FormControl('', Validators.required),
       rangeFinal: new FormControl('', Validators.required),
       status: new FormControl('', Validators.required),
-      idProduto: new FormControl('', [Validators.required, validateInstanceValueError(ItensProduto)]),
+      //idProduto: new FormControl('', [Validators.required, validateInstanceValueError(ItensProduto)]),
+      idProduto: new FormControl('', Validators.required),
       timeCustom: new FormControl('', Validators.required),
     });
   }
@@ -137,9 +145,13 @@ export class LinksFormularioComponent implements OnInit, OnDestroy {
     linksModal.rangeInicial = this.linksForm.get(['rangeInicial']).value;
     linksModal.rangeFinal = this.linksForm.get(['rangeFinal']).value;
     linksModal.status = this.linksForm.get(['status']).value;
-    linksModal.idProduto = this.linksForm.get(['idProduto']).value.id;
-    linksModal.schedulingTime = this.linksForm.get(['timeCustom']).value;
-
+    linksModal.idProduto = this.linksForm.get(['idProduto']).value;
+    let schedulingTime: SchedulingTime = {} as SchedulingTime;
+    schedulingTime = this.linksForm.get(['timeCustom']).value;
+    linksModal.hours = schedulingTime.hours;
+    linksModal.minutes = schedulingTime.minutes;
+    linksModal.nextDate = schedulingTime.nextDate;
+    console.log("button salvar ", JSON.stringify(linksModal));
 
     if (this._activedRoute.snapshot.params['id'] !== undefined) {
       this.alterarObject(linksModal);

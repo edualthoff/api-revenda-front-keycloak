@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 import { ConfirmDialogModule } from 'src/app/shared/components/confirm-dialog/confirm-dialog.module';
 import { ItensFormularioComponent } from './itens-formulario/itens-formulario.component';
 import { ItensListComponent } from './itens-list/itens-list.component';
-import {MatSelectInfiniteScrollModule} from 'ng-mat-select-infinite-scroll';
+import { MatSelectInfiniteScrollModule } from 'ng-mat-select-infinite-scroll';
 
 const importsPadrao = [
   AngularMaterialModule,

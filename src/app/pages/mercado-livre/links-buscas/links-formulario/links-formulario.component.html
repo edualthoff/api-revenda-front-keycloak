@@ -82,11 +82,11 @@
                         </mat-option>
                         <ng-container *ngIf="!obs.itensLoading">
                             <ng-container *ngFor="let itensOptionGroup of obs.itensResults; let i=index">
-                                <mat-optgroup [label]="itensOptionGroup.categoriasModal.nome"
+                                <mat-optgroup [label]="itensOptionGroup.idCategoria.nome"
                                     *ngIf="i === 0 || itensOptionGroup.idCategoria !== obs.itensResults[i-1].idCategoria">
                                     <ng-container *ngFor="let itensOption of obs.itensResults">
                                         <mat-option [value]="itensOption"
-                                            *ngIf="itensOptionGroup.categoriasModal.nome == itensOption.categoriasModal.nome ">
+                                            *ngIf="itensOptionGroup.idCategoria.nome == itensOption.idCategoria.nome ">
                                             {{ itensOption.modelo }}
                                         </mat-option>
                                     </ng-container>
@@ -107,6 +107,6 @@
 
 <!--                 <div> form: {{selectAuto2 }} </div>
                 <div *ngFor="let item of obs.itensResults; let i=index">
-                    a: {{item.categoriasModal.nome }} aa {{item.idCategoria}} i {{i}}
+                    a: {{item.idCategoria.nome }} aa {{item.idCategoria}} i {{i}}
                 </div>
                 <div>{{linksForm.get(['rangerInicial']).value}}</div> -->

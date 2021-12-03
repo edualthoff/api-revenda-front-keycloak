@@ -78,7 +78,7 @@ export class CategoriasComponent implements OnInit {
   }
 
 
-  buttonExlcuir(idCategoria: string) {
+  buttonExlcuir(idCategoria: number) {
     this.dialog.ngOnDestroy();
     const message = `Gostaria de excluir a categoia?`;
     const dialogData = new ConfirmDialogModel(this.dialog, "Excluir Categoria", message);
@@ -94,7 +94,7 @@ export class CategoriasComponent implements OnInit {
    * Criar um Component Dialog qual manipula as informaçoes da categoria
    *
    * @private
-   * @param {CategoriasModal} categoria
+   * @param {IdCategoria} categoria
    * @returns {Observable<any>}
    * @memberof CategoriasComponent
    */

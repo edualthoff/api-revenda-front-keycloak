@@ -1,4 +1,4 @@
-import { AuthTokenStorageService } from './../../../core/security/auth-tokenstorage.service';
+import { KeycloakService } from 'keycloak-angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private token: AuthTokenStorageService) { }
+  constructor(private token: KeycloakService) { }
 
   ngOnInit(): void {
   }

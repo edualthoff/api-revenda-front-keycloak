@@ -1,5 +1,5 @@
+import { pathValues, pathPredicates } from './../../../../core/util/path-values';
 import { MarcasModal, MarcasListResponse } from './marcas.model';
-import { API_URL } from './../../../../core/settings/config.settings';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -16,24 +16,24 @@ export class HttpMarcasService {
    * Adiiconar uma nova Marca
    */
   post(marcasModel: MarcasModal) {
-    return this.http.post<MarcasModal>(`${API_URL}/${this.urlMarcas}`, marcasModel);
+    return this.http.post<MarcasModal>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.urlMarcas}`, marcasModel);
   }
 
-  delete(idMarcas: string) {
-    //console.log("delete "+ (`${API_URL}/categorias/`+ encodeURIComponent(idMarcas)));
-    return this.http.delete<MarcasModal>(`${API_URL}/${this.urlMarcas}/${idMarcas}`);
+  delete(idMarcas: number) {
+    //console.log("delete "+ (`${API_URL}/categorias/`+ encodeURIComponent(MarcasModals)));
+    return this.http.delete<MarcasModal>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.urlMarcas}/${idMarcas}`);
   }
 
-  put(idMarcas: string, marcasModel: MarcasModal){
-    return this.http.put<MarcasModal>(`${API_URL}/${this.urlMarcas}/${idMarcas}`, marcasModel);
+  put(idMarcas: number, marcasModel: MarcasModal){
+    return this.http.put<MarcasModal>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.urlMarcas}/${idMarcas}`, marcasModel);
   }
   getTodosPage(pageNumber: number = 0, pageSize: number = 10) {
     const params = { page: pageNumber.toString(), size: pageSize.toString() };
-    return this.http.get<MarcasListResponse>(`${API_URL}/${this.urlMarcas}/todos`, { params });
+    return this.http.get<MarcasListResponse>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.urlMarcas}/todos`, { params });
   }
 
-  get( idMarca: string) {
-    console.log("service marca: ", idMarca)
-    return this.http.get<MarcasModal>(`${API_URL}/${this.urlMarcas}/${idMarca}`);
+  get(idMarcas: number) {
+    console.log("service marca: ", idMarcas)
+    return this.http.get<MarcasModal>(`${pathValues.REVENDA_API}/${pathPredicates.MERCADO_LIVRE}/${this.urlMarcas}/${idMarcas}`);
   }
 }

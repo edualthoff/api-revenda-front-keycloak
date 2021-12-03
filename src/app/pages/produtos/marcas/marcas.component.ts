@@ -76,12 +76,12 @@ export class MarcasComponent implements OnInit, OnDestroy {
   }
 
 
-  buttonExlcuir(idCategoria: string) {
+  buttonExlcuir(idMarca: number) {
     this.dialog.ngOnDestroy();
     const message = `Gostaria de excluir a categoia?`;
     const dialogData = new ConfirmDialogModel(this.dialog, "Excluir Marcas", message);
     this.subscription.add(dialogData.montDialog().pipe(filter(x => x === true)).subscribe((x) => {
-      this.http.delete(idCategoria).subscribe(
+      this.http.delete(idMarca).subscribe(
         () => { },
         () => { },
         () => { this.loadTodosPage(); });

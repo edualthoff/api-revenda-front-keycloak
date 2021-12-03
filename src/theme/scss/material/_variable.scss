@@ -1,5 +1,48 @@
+/* ==========  Palette Base  ========== */
+$color-dark-gray: #333;
+$color-gray: #444;
+$color-table-border: #606060;
+$color-smooth-gray: #999;
+$color-smoke: #666;
+$color-red: #f44336;
+$color-red-wart: #A52A2A;
+$color-light-blue: #03a9f4;
+$color-orange: #ffc107;
+$color-amber: #ff9800;
+$color-teal: #00bcd4;
+$color-purple: #7726d3;
+$color-green: #00d45a;
+$color-white: #fff;
+$color-black: #000;
+$color-alto: #ddd;
+$color-silver-chalice: #aaa;
+$color-chambray: #3b5998;
+$color-celurean: #00abf1;
+$color-lochmara: #0083be;
+$color-froly: #f26798;
+$color-dodger-blue: #4176fb;
+$color-dove-gray: #676767;
+$color-primary: #00bcd4;
+$color-secondary: rgb(244, 67, 54);
+$color-baby-blue: rgb(116, 199, 209);
+$color-cerulean: rgb(80, 150, 215);
+$color-mint: rgb(96, 196, 150);
+
 /* ==========  Header  ========== */
-$header-background-color: #050505 !important;
+$header-background-color: #202020 !important;
+
+/* ==========  Typography  ========== */
+$text-color-primary: rgba($color-white, 0.87);
 
 /* ==========  Card  ========== */
-$card-title-background-color: #333;
+$card-title-background-color: #202020;
+
+/* ==========  Drawer  ========== */
+$layout-drawer-font-size: 13px;
+$layout-drawer-icon-size: 23px;
+$layout-drawer-width: 236px;
+$layout-drawer-bg-color: #202020;
+$layout-nav-color: #202020;
+$layout-drawer-navigation-link-active-color: $color-primary;
+$layout-drawer-header-bg-color: rgba($color-black, 0.85);
+$layout-drawer-navigation-link-icon-color: rgba($color-white, 0.56);

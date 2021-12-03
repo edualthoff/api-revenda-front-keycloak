@@ -18,10 +18,11 @@
                 </mat-form-field>
                  <!-- Marca -->
                 <mat-form-field appearance="legacy">
-                    <mat-label>Selecione a Marca</mat-label>
-                    <mat-select msInfiniteScroll (infiniteScroll)="listarSelectMarcas()"
-                        [complete]="pagMarcas === totalPagMarca" formControlName="idMarca">
-                        <mat-option *ngFor="let option of marcasList " [value]="option.id">{{option.nome}}</mat-option>
+                    <!-- <mat-label>Selecione a Marca</mat-label>-->
+                    <mat-select placeholder="Selecione a Marca" msInfiniteScroll (infiniteScroll)="listarSelectMarcas()"
+                        [complete]="pagMarcas === totalPagMarca" [formControl]="itensForm.get('idMarca')">
+                        <mat-select-trigger>{{itensForm.get('idMarca').value?.nome}}</mat-select-trigger>
+                        <mat-option *ngFor="let option of marcasList " [value]="option">{{option.nome}}</mat-option>
                     </mat-select>
                     <mat-error *ngIf="marcasList.length === 0">
                         Cadastre uma Marca <strong><a [routerLink]="[ '../../marcas' ]" routerLinkActive="active">Click AQUI</a></strong>
@@ -29,10 +30,11 @@
                 </mat-form-field>
                  <!-- Categoria -->
                 <mat-form-field appearance="legacy">
-                    <mat-label>Selecione a Categoria</mat-label>
-                    <mat-select  msInfiniteScroll (infiniteScroll)="listarSelectCategorias()"
-                        [complete]="pagCategoria === totalPagCategoria" formControlName="idCategoria">
-                        <mat-option *ngFor="let option of categoriasList" [value]="option.id">{{option.nome}}</mat-option>
+                     <!--<mat-label>Selecione a Categoria</mat-label>>-->
+                    <mat-select placeholder="Selecione a Categoria" msInfiniteScroll (infiniteScroll)="listarSelectCategorias()"
+                        [complete]="pagCategoria === totalPagCategoria" [formControl]="itensForm.get('idCategoria')">
+                       <!-- <mat-select-trigger>{{itensForm.get('idCategoria').value?.nome}}</mat-select-trigger>-->
+                        <mat-option *ngFor="let option of categoriasList" [value]="option">{{option.nome}}</mat-option>
                     </mat-select>
                     <mat-error *ngIf="categoriasList.length === 0">
                         Cadastre uma categoria <strong><a [routerLink]="[ '../../categorias' ]" routerLinkActive="active">Click AQUI</a></strong>
